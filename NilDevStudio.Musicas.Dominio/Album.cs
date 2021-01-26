@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NilDevStudio.Musicas.Dominio
 {
-    class Album
+    public class Album
     {
         public int Id { get; set; }
         public String Nome { get; set; }
