@@ -1,4 +1,4 @@
-﻿@model NilDevStudio.Musicas.Dominio.Album
+﻿@model NilDevStudio.Musicas.Web.ViewModels.Album.AlbumViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Album</h4>
         <hr />

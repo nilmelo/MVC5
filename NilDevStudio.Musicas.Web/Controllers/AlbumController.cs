@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using NilDevStudio.Musicas.AcessoDados.Entity.Context;
 using NilDevStudio.Musicas.Dominio;
+using NilDevStudio.Musicas.Web.ViewModels.Album;
 
 namespace NilDevStudio.Musicas.Web.Controllers
 {
@@ -18,7 +20,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
         // GET: Album
         public ActionResult Index()
         {
-            return View(db.Albuns.ToList());
+            return View(Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(db.Albuns.ToList()));
         }
 
         // GET: Album/Details/5
@@ -33,7 +35,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(Mapper.Map<Album, AlbumIndexViewModel>(album));
         }
 
         // GET: Album/Create
@@ -47,16 +49,17 @@ namespace NilDevStudio.Musicas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Ano,Observacoes")] Album album)
+        public ActionResult Create([Bind(Include = "Id,Nome,Ano,Observacoes")] AlbumViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                Album album = Mapper.Map<AlbumViewModel, Album>(viewModel);
                 db.Albuns.Add(album);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(album);
+            return View(viewModel);
         }
 
         // GET: Album/Edit/5
@@ -71,7 +74,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(Mapper.Map<Album, AlbumViewModel>(album));
         }
 
         // POST: Album/Edit/5
@@ -79,15 +82,16 @@ namespace NilDevStudio.Musicas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Ano,Observacoes")] Album album)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Ano,Observacoes")] AlbumViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                Album album = Mapper.Map<AlbumViewModel, Album>(viewModel);
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(album);
+            return View(viewModel);
         }
 
         // GET: Album/Delete/5
@@ -102,7 +106,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(Mapper.Map<Album, AlbumIndexViewModel>(album));
         }
 
         // POST: Album/Delete/5
