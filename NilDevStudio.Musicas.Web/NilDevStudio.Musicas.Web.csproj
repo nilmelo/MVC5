@@ -213,6 +213,18 @@
       <Project>{07c8fd00-e49b-4a3d-9035-52660751cf1e}</Project>
       <Name>NilDevStudio.Musicas.Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NilDevStudio.Musicas.Repositorios.Entity\NilDevStudio.Musicas.Repositorios.Entity.csproj">
+      <Project>{5a129d98-4759-4d61-84a6-5e7a379b2fdc}</Project>
+      <Name>NilDevStudio.Musicas.Repositorios.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NilDevStudio.Repositorios.Comum.Entity\NilDevStudio.Repositorios.Comum.Entity.csproj">
+      <Project>{af3fd04e-6cb5-40f6-a06d-6d396442c61c}</Project>
+      <Name>NilDevStudio.Repositorios.Comum.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NilDevStudio.Repositorios.Comum\NilDevStudio.Repositorios.Comum.csproj">
+      <Project>{b7963c63-39f9-44be-a3fb-3fb3d59d5e2f}</Project>
+      <Name>NilDevStudio.Repositorios.Comum</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

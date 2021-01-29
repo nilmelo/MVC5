@@ -15,6 +15,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilDevStudio.Musicas.Acesso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilDevStudio.Comum.Entity", "NilDevStudio.Comum.Entity\NilDevStudio.Comum.Entity.csproj", "{CC308657-9787-4325-90E6-B6A01B312F1D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositorios", "Repositorios", "{F0B6F3B7-61C2-4F67-BB78-C07F15B3169E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilDevStudio.Repositorios.Comum", "NilDevStudio.Repositorios.Comum\NilDevStudio.Repositorios.Comum.csproj", "{B7963C63-39F9-44BE-A3FB-3FB3D59D5E2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilDevStudio.Repositorios.Comum.Entity", "NilDevStudio.Repositorios.Comum.Entity\NilDevStudio.Repositorios.Comum.Entity.csproj", "{AF3FD04E-6CB5-40F6-A06D-6D396442C61C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NilDevStudio.Musicas.Repositorios.Entity", "NilDevStudio.Musicas.Repositorios.Entity\NilDevStudio.Musicas.Repositorios.Entity.csproj", "{5A129D98-4759-4D61-84A6-5E7A379B2FDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +45,18 @@ Global
 		{CC308657-9787-4325-90E6-B6A01B312F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC308657-9787-4325-90E6-B6A01B312F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC308657-9787-4325-90E6-B6A01B312F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7963C63-39F9-44BE-A3FB-3FB3D59D5E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7963C63-39F9-44BE-A3FB-3FB3D59D5E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7963C63-39F9-44BE-A3FB-3FB3D59D5E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7963C63-39F9-44BE-A3FB-3FB3D59D5E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF3FD04E-6CB5-40F6-A06D-6D396442C61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF3FD04E-6CB5-40F6-A06D-6D396442C61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF3FD04E-6CB5-40F6-A06D-6D396442C61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF3FD04E-6CB5-40F6-A06D-6D396442C61C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A129D98-4759-4D61-84A6-5E7A379B2FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A129D98-4759-4D61-84A6-5E7A379B2FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A129D98-4759-4D61-84A6-5E7A379B2FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A129D98-4759-4D61-84A6-5E7A379B2FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +65,9 @@ Global
 		{07C8FD00-E49B-4A3D-9035-52660751CF1E} = {76B96C6D-9FC7-4CB4-9C33-92BE576BFA17}
 		{2A38C05D-0D1A-4648-853F-537C6F85B0BB} = {6398C3F5-1A14-4F61-8E31-1241F3170B73}
 		{CC308657-9787-4325-90E6-B6A01B312F1D} = {6398C3F5-1A14-4F61-8E31-1241F3170B73}
+		{B7963C63-39F9-44BE-A3FB-3FB3D59D5E2F} = {F0B6F3B7-61C2-4F67-BB78-C07F15B3169E}
+		{AF3FD04E-6CB5-40F6-A06D-6D396442C61C} = {F0B6F3B7-61C2-4F67-BB78-C07F15B3169E}
+		{5A129D98-4759-4D61-84A6-5E7A379B2FDC} = {F0B6F3B7-61C2-4F67-BB78-C07F15B3169E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8AD64DF1-8AAD-4D4C-8B6A-0A77DEF6AB93}

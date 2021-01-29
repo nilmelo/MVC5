@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -9,18 +9,20 @@ using System.Web.Mvc;
 using AutoMapper;
 using NilDevStudio.Musicas.AcessoDados.Entity.Context;
 using NilDevStudio.Musicas.Dominio;
+using NilDevStudio.Musicas.Repositorios.Entity;
 using NilDevStudio.Musicas.Web.ViewModels.Album;
+using NilDevStudio.Repositorios.Comum;
 
 namespace NilDevStudio.Musicas.Web.Controllers
 {
     public class AlbumController : Controller
     {
-        private MusicasDbContext db = new MusicasDbContext();
+        private IRepositorioGenerico<Album, int> repositorioAlbum = new AlbumRepositorio(new MusicasDbContext());
 
         // GET: Album
         public ActionResult Index()
         {
-            return View(Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(db.Albuns.ToList()));
+            return View(Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(repositorioAlbum.Selecionar()));
         }
 
         // GET: Album/Details/5
@@ -30,7 +32,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albuns.Find(id);
+            Album album = repositorioAlbum.SelecionarPorId(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -54,8 +56,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             if (ModelState.IsValid)
             {
                 Album album = Mapper.Map<AlbumViewModel, Album>(viewModel);
-                db.Albuns.Add(album);
-                db.SaveChanges();
+                repositorioAlbum.Inserir(album);
                 return RedirectToAction("Index");
             }
 
@@ -69,7 +70,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albuns.Find(id);
+            Album album = repositorioAlbum.SelecionarPorId(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -87,8 +88,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             if (ModelState.IsValid)
             {
                 Album album = Mapper.Map<AlbumViewModel, Album>(viewModel);
-                db.Entry(album).State = EntityState.Modified;
-                db.SaveChanges();
+                repositorioAlbum.Alterar(album);
                 return RedirectToAction("Index");
             }
             return View(viewModel);
@@ -101,7 +101,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albuns.Find(id);
+            Album album = repositorioAlbum.SelecionarPorId(id.Value);
             if (album == null)
             {
                 return HttpNotFound();
@@ -114,19 +114,8 @@ namespace NilDevStudio.Musicas.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albuns.Find(id);
-            db.Albuns.Remove(album);
-            db.SaveChanges();
+            repositorioAlbum.ExcluirPorId(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
