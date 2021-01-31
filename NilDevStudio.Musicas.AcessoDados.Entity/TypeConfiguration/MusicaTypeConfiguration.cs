@@ -8,28 +8,23 @@ using System.Threading.Tasks;
 
 namespace NilDevStudio.Musicas.AcessoDados.Entity.TypeConfiguration
 {
-    class AlbumTypeConfiguration : NDSEntityAbstractConfig<Album>
+    class MusicaTypeConfiguration : NDSEntityAbstractConfig<Musica>
     {
         protected override void ConfigurarCamposTabela()
         {
             Property(p => p.Id)
                 .IsRequired()
                 .HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity)
-                .HasColumnName("ALB_ID");
+                .HasColumnName("MUS_ID");
 
             Property(p => p.Nome)
                 .IsRequired()
-                .HasColumnName("ALB_NOME")
-                .HasMaxLength(100);
+                .HasColumnName("MUS_NOME")
+                .HasMaxLength(50);
 
-            Property(p => p.Ano)
+            Property(p => p.IdAlbum)
                 .IsRequired()
-                .HasColumnName("ALB_ANO");
-
-            Property(p => p.Observacoes)
-                .IsOptional()
-                .HasColumnName("ALB_OBSERVACOES")
-                .HasMaxLength(1000);
+                .HasColumnName("ALB_ID");
         }
 
         protected override void ConfigurarChavePrimaria()
@@ -39,17 +34,14 @@ namespace NilDevStudio.Musicas.AcessoDados.Entity.TypeConfiguration
 
         protected override void ConfigurarChaveEstrangeira()
         {
-            /** Linha de código apenas para fins didáticos
-             *A configuração já foi feita na parte do MusicaTypeConfiguration
-             * HasMany(p => p.Musicas)
-                .WithRequired(p => p.Album)
+            HasRequired(p => p.Album)
+                .WithMany(p => p.Musicas)
                 .HasForeignKey(fk => fk.IdAlbum);
-             */
         }
 
         protected override void ConfigurarNomeTabela()
         {
-            ToTable("ALB_ALBUNS");
+            ToTable("MUS_MUSICAS");
         }
     }
 }

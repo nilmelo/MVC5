@@ -14,7 +14,7 @@ namespace NilDevStudio.Musicas.AcessoDados.Entity.Context
         public DbSet<Album> Albuns { get; set; }
 
         public MusicasDbContext()
-        {
+        {   
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
         }
@@ -22,6 +22,7 @@ namespace NilDevStudio.Musicas.AcessoDados.Entity.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new AlbumTypeConfiguration());
+            modelBuilder.Configurations.Add(new MusicaTypeConfiguration());
         }
     }
 }
