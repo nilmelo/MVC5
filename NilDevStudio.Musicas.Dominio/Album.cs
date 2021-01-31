@@ -12,5 +12,7 @@ namespace NilDevStudio.Musicas.Dominio
         public String Nome { get; set; }
         public int Ano { get; set; }
         public String Observacoes { get; set; }
+
+        public virtual List<Musica> Musicas { get; set; }
     }
 }
