@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NilDevStudio.Musicas.Dominio;
 using NilDevStudio.Musicas.Web.ViewModels.Album;
+using NilDevStudio.Musicas.Web.ViewModels.Musica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace NilDevStudio.Musicas.Web.AutoMapper
     {
         protected override void Configure()
         {
-            Mapper.CreateMap<AlbumIndexViewModel, Album>();
+            Mapper.CreateMap<AlbumViewModel, Album>();
+            Mapper.CreateMap<MusicaViewModel, Musica>();
         }
     }
 }

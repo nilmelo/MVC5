@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NilDevStudio.Musicas.Dominio;
 using NilDevStudio.Musicas.Web.ViewModels.Album;
+using NilDevStudio.Musicas.Web.ViewModels.Musica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,15 @@ namespace NilDevStudio.Musicas.Web.AutoMapper
                     );
                 });
             Mapper.CreateMap<Album, AlbumViewModel>();
+
+            Mapper.CreateMap<Musica, MusicaExibicaoViewModel>()
+                .ForMember(p => p.NomeAlbum, opt =>
+                {
+                    opt.MapFrom(src =>
+                        src.Album.Nome
+                    );
+                });
+            Mapper.CreateMap<Musica, MusicaExibicaoViewModel>();
         }
     }
 }
