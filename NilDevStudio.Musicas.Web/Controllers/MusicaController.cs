@@ -10,6 +10,7 @@ using AutoMapper;
 using NilDevStudio.Musicas.AcessoDados.Entity.Context;
 using NilDevStudio.Musicas.Dominio;
 using NilDevStudio.Musicas.Repositorios.Entity;
+using NilDevStudio.Musicas.Web.ViewModels.Album;
 using NilDevStudio.Musicas.Web.ViewModels.Musica;
 using NilDevStudio.Repositorios.Comum;
 
@@ -18,6 +19,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
     public class MusicaController : Controller
     {
         private IRepositorioGenerico<Musica, long> repositorioMusica = new MusicaRepositorio(new MusicasDbContext());
+        private IRepositorioGenerico<Album, int> repositorioAlbum = new AlbumRepositorio(new MusicasDbContext());
 
         // GET: Musica
         public ActionResult Index()
@@ -43,7 +45,9 @@ namespace NilDevStudio.Musicas.Web.Controllers
         // GET: Musica/Create
         public ActionResult Create()
         {
-            ViewBag.IdAlbum = new SelectList(db.Albums, "Id", "Nome");
+            List<AlbumIndexViewModel> albuns = Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(repositorioAlbum.Selecionar());
+            SelectList dropDownAlbuns = new SelectList(albuns, "Id", "Nome");
+            ViewBag.DropDownAlbuns = dropDownAlbuns;
             return View();
         }
 
@@ -52,17 +56,15 @@ namespace NilDevStudio.Musicas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,IdAlbum")] Musica musica)
+        public ActionResult Create([Bind(Include = "Id,Nome,IdAlbum")] MusicaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Musicas.Add(musica);
-                db.SaveChanges();
+                Musica musica = Mapper.Map<MusicaViewModel, Musica>(viewModel);
+                repositorioMusica.Inserir(musica);
                 return RedirectToAction("Index");
             }
-
-            ViewBag.IdAlbum = new SelectList(db.Albums, "Id", "Nome", musica.IdAlbum);
-            return View(musica);
+            return View(viewModel);
         }
 
         // GET: Musica/Edit/5
@@ -72,13 +74,15 @@ namespace NilDevStudio.Musicas.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Musica musica = db.Musicas.Find(id);
+            Musica musica = repositorioMusica.SelecionarPorId(id.Value);
             if (musica == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdAlbum = new SelectList(db.Albums, "Id", "Nome", musica.IdAlbum);
-            return View(musica);
+            List<AlbumIndexViewModel> albuns = Mapper.Map<List<Album>, List<AlbumIndexViewModel>>(repositorioAlbum.Selecionar());
+            SelectList dropDownAlbuns = new SelectList(albuns, "Id", "Nome");
+            ViewBag.DropDownAlbuns = dropDownAlbuns;
+            return View(Mapper.Map<Musica, MusicaViewModel>(musica));
         }
 
         // POST: Musica/Edit/5
@@ -86,16 +90,15 @@ namespace NilDevStudio.Musicas.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,IdAlbum")] Musica musica)
+        public ActionResult Edit([Bind(Include = "Id,Nome,IdAlbum")] MusicaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(musica).State = EntityState.Modified;
-                db.SaveChanges();
+                Musica musica = Mapper.Map<MusicaViewModel, Musica>(viewModel);
+                repositorioMusica.Alterar(musica);
                 return RedirectToAction("Index");
             }
-            ViewBag.IdAlbum = new SelectList(db.Albums, "Id", "Nome", musica.IdAlbum);
-            return View(musica);
+            return View(viewModel);
         }
 
         // GET: Musica/Delete/5
@@ -118,9 +121,7 @@ namespace NilDevStudio.Musicas.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Musica musica = db.Musicas.Find(id);
-            db.Musicas.Remove(musica);
-            db.SaveChanges();
+            repositorioMusica.ExcluirPorId(id);
             return RedirectToAction("Index");
         }
     }
